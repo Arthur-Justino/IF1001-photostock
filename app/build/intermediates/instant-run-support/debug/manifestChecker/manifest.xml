@@ -44,6 +44,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.parse.starter.activities.MainActivity" />
+        <activity android:name="com.parse.starter.activities.CadastroActivity" />
 
         <provider
             android:name="com.android.tools.ir.server.InstantRunContentProvider"

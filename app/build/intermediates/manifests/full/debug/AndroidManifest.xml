@@ -25,7 +25,6 @@
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.parse.APPLICATION_ID"
@@ -44,6 +43,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.parse.starter.activities.MainActivity" />
+        <activity android:name="com.parse.starter.activities.CadastroActivity" />
     </application>
 
 </manifest>

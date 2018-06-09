@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\artju\\Desktop\\Android\\ProjetoP3\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-lo-rLA\\values-lo-rLA.xml",
+            "outputFile": "C:\\Users\\artju\\Desktop\\Android\\projeto-p3\\ProjetoP3\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-lo-rLA\\values-lo-rLA.xml",
             "map": [
                 {
                     "source": "C:\\Users\\artju\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\a239e069f825a01ad6d5280770968c51\\res\\values-lo-rLA\\values-lo-rLA.xml",

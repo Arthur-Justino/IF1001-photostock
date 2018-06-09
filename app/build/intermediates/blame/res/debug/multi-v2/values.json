@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\artju\\Desktop\\Android\\ProjetoP3\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\artju\\Desktop\\Android\\projeto-p3\\ProjetoP3\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\artju\\.gradle\\caches\\transforms-1\\files-1.1\\constraint-layout-1.1.0.aar\\a582b9579775c58006e68949c10e15b5\\res\\values\\values.xml",
@@ -23,7 +23,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\artju\\Desktop\\Android\\ProjetoP3\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\artju\\Desktop\\Android\\projeto-p3\\ProjetoP3\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "15,12,14,9,10",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "594,492,541,369,430",
+                        "endColumns": "52,47,52,60,60",
+                        "endOffsets": "642,535,589,425,486"
+                    },
+                    "to": {
+                        "startLines": "320,321,322,323,324",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "38266,38319,38367,38420,38481",
+                        "endColumns": "52,47,52,60,60",
+                        "endOffsets": "38314,38362,38415,38476,38537"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\artju\\Desktop\\Android\\projeto-p3\\ProjetoP3\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "11",
                         "startColumns": "4",
@@ -39,23 +56,6 @@
                         "endLines": "333",
                         "endColumns": "12",
                         "endOffsets": "39156"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\artju\\Desktop\\Android\\ProjetoP3\\app\\src\\main\\res\\values\\dimens.xml",
-                    "from": {
-                        "startLines": "10,11",
-                        "startColumns": "4,4",
-                        "startOffsets": "403,461",
-                        "endColumns": "57,55",
-                        "endOffsets": "456,512"
-                    },
-                    "to": {
-                        "startLines": "277,278",
-                        "startColumns": "4,4",
-                        "startOffsets": "35480,35538",
-                        "endColumns": "57,55",
-                        "endOffsets": "35533,35589"
                     }
                 },
                 {
@@ -78,20 +78,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\artju\\Desktop\\Android\\ProjetoP3\\app\\src\\main\\res\\values\\strings.xml",
+                    "source": "C:\\Users\\artju\\Desktop\\Android\\projeto-p3\\ProjetoP3\\app\\src\\main\\res\\values\\dimens.xml",
                     "from": {
-                        "startLines": "15,12,14,9,10",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "594,492,541,369,430",
-                        "endColumns": "52,47,52,60,60",
-                        "endOffsets": "642,535,589,425,486"
+                        "startLines": "10,11",
+                        "startColumns": "4,4",
+                        "startOffsets": "403,461",
+                        "endColumns": "57,55",
+                        "endOffsets": "456,512"
                     },
                     "to": {
-                        "startLines": "320,321,322,323,324",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "38266,38319,38367,38420,38481",
-                        "endColumns": "52,47,52,60,60",
-                        "endOffsets": "38314,38362,38415,38476,38537"
+                        "startLines": "277,278",
+                        "startColumns": "4,4",
+                        "startOffsets": "35480,35538",
+                        "endColumns": "57,55",
+                        "endOffsets": "35533,35589"
                     }
                 }
             ]

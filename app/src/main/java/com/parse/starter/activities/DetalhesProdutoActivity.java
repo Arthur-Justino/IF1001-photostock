@@ -1,12 +1,10 @@
 package com.parse.starter.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.parse.starter.R;
-
-import org.w3c.dom.Text;
 
 public class DetalhesProdutoActivity extends AppCompatActivity {
     private TextView nomeProd;

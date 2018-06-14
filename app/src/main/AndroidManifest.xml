@@ -34,8 +34,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.CadastroActivity"></activity>
+        <activity android:name=".activities.CadastroActivity" />
+        <activity android:name=".activities.ListaProdutosActivity" />
+        <activity android:name=".activities.DetalhesProdutoActivity"/>
+        <activity android:name=".activities.CadastroProdutosActivity"></activity>
     </application>
 
 </manifest>

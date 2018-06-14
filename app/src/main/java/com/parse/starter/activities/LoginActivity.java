@@ -15,7 +15,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
     public void abrirCadastroUsuario(View view){
-       Intent intent = new Intent(LoginActivity.this,CadastroActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(LoginActivity.this,CadastroActivity.class));
+    }
+    public void goToLista(View view){
+        startActivity(new Intent(LoginActivity.this,ListaProdutosActivity.class));
     }
 }

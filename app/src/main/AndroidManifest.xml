@@ -38,6 +38,9 @@
         <activity android:name=".activities.ListaProdutosActivity" />
         <activity android:name=".activities.DetalhesProdutoActivity"/>
         <activity android:name=".activities.CadastroProdutosActivity"></activity>
+        <service android:name=".Services.ServiceIntent"
+                 android:exported="false"
+            ></service>
     </application>
 
 </manifest>

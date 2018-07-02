@@ -24,10 +24,9 @@ public class ServiceIntent extends IntentService {
         final String quant;
 
         synchronized (this) {
-            int count = 0;
 
                 try {
-                    wait(8000);
+                    wait(2000);
                     ParseObject prod = new ParseObject("Produto");
                     nome = (String) intent.getExtras().get("nomeProd");
                     quant = (String) intent.getExtras().get("quantProd");
@@ -45,7 +44,7 @@ public class ServiceIntent extends IntentService {
 
                         }
                     });
-                    count++;
+
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();

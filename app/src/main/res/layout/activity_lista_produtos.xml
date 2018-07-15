@@ -44,4 +44,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+
+        android:background="@drawable/validity"
+        android:onClick="abrirListaForaDeValidade"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2" />
+
+
+
 </android.support.constraint.ConstraintLayout>

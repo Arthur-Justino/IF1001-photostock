@@ -2,11 +2,9 @@ package com.parse.starter.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.drm.ProcessedData;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,18 +24,22 @@ public class ListaProdutosActivity extends AppCompatActivity {
     ListView listaprod;
     private ProgressDialog progD;
     final ArrayList<String> listaNome = new ArrayList<String>();
-    final ArrayList<Number> listaQuant = new ArrayList<Number>();
-    final int flag = 0;
+
+    private ParseQuery<ParseObject> query;
+    final ArrayList<ParseObject> items = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_produtos);
-        listaprod = (ListView) findViewById(R.id.listViewId);
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        listaprod = (ListView) findViewById(R.id.listViewId);
 
         // Parâmetros do ProgressDialog
         progD = new ProgressDialog(ListaProdutosActivity.this);
@@ -48,14 +50,21 @@ public class ListaProdutosActivity extends AppCompatActivity {
         progD.setProgress(0);
         progD.show();
         listaNome.clear();
+        items.clear();
         CarregaLista cl = new CarregaLista();
         cl.execute(10);
         listaprod.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ListaProdutosActivity.this, DetalhesProdutoActivity.class);
-                intent.putExtra("nomeProd",listaNome.get(i));
-                intent.putExtra("quantProd",listaQuant.get(i).toString());
+
+                ParseObject parseObject = items.get(i);
+
+                intent.putExtra("nomeProd",parseObject.get("produto").toString());
+                intent.putExtra("quantProd",parseObject.get("quantidade").toString());
+                intent.putExtra("validade",parseObject.get("validade").toString());
+                intent.putExtra("imagem", parseObject.getParseFile("foto").getUrl());
+
                 startActivity(intent);
 
             }
@@ -68,6 +77,10 @@ public class ListaProdutosActivity extends AppCompatActivity {
         startActivity(new Intent(ListaProdutosActivity.this,CadastroProdutosActivity.class));
     }
 
+    public void abrirListaForaDeValidade(View view){
+        startActivity(new Intent(ListaProdutosActivity.this,RepeatingActivity.class));
+    }
+
     public class CarregaLista extends AsyncTask<Integer, String, String>{
         @Override
         protected String doInBackground(Integer... integers) {
@@ -76,30 +89,30 @@ public class ListaProdutosActivity extends AppCompatActivity {
             int total = integers[0];
 
 
-            ParseQuery<ParseObject> consulta = new ParseQuery<ParseObject>("Produto");
-            consulta.findInBackground(new FindCallback<ParseObject>() {
+            query = ParseQuery.getQuery("Produto");
+            query.addAscendingOrder("validade");
+            query.findInBackground(new FindCallback<ParseObject>() {
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {
+                    if (e==null){
+                        for (ParseObject parseObject : objects){
+                            listaNome.add(parseObject.get("produto").toString());
+                            items.add(parseObject);
 
-                    if (e == null) {
-                            for (ParseObject item : objects) {
-                                    listaNome.add(item.get("produto").toString());
-                                    listaQuant.add((Number) item.get("quantidade"));
-                            }
+                        }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                                 getApplicationContext(),
                                 android.R.layout.simple_list_item_1,
                                 android.R.id.text1, listaNome);
                         listaprod.setAdapter(adapter);
-
-
-                    } else {
+                    }
+                    else {
                         Toast.makeText(getApplicationContext(),"Lista vazia",Toast.LENGTH_SHORT).show();
                     }
 
                 }
+            });
 
-        });
             while(progress<=total){
                 try{
                     Thread.sleep(integers[0]*30);

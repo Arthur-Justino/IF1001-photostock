@@ -10,10 +10,10 @@ import android.widget.Toast;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -50,7 +50,6 @@ public class ServiceIntent extends IntentService {
     }
 
     private byte[] readInFile(String path, Uri seleima) throws IOException {
-        File image = new File(path);
 
 
         ParcelFileDescriptor parcelFileDescriptor = getContentResolver().openFileDescriptor(seleima,"r");
@@ -79,9 +78,6 @@ public class ServiceIntent extends IntentService {
         final String quant;
         final String path;
         final Uri seleima;
-       // final String vali;
-       // final String nomeImagem;
-        //final byte[] img;
 
         synchronized (this) {
 
@@ -112,7 +108,6 @@ public class ServiceIntent extends IntentService {
                     } catch (java.text.ParseException e) {
                         e.printStackTrace();
                     }
-                    //img = (byte[]) intent.getExtras().get("imagem");
 
                     ParseObject prod = new ParseObject("Produto");
                     ParseFile file = new ParseFile("imagem.png",image);
@@ -121,6 +116,7 @@ public class ServiceIntent extends IntentService {
                     prod.put("quantidade", Integer.parseInt(quant));
                     prod.put("validade",date);
                     prod.put("foto",file);
+                    prod.put("username", ParseUser.getCurrentUser().getUsername().toString());
                     prod.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {

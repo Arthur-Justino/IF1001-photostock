@@ -57,6 +57,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageButton2" />
 
+    <ImageView
+        android:id="@+id/sairButton"
+        android:layout_width="39dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="8dp"
+        android:onClick="deslogar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/logout" />
 
 
 </android.support.constraint.ConstraintLayout>

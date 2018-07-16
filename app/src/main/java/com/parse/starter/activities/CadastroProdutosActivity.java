@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,18 +19,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 
 import com.parse.starter.R;
 import com.parse.starter.Services.ServiceIntent;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+
 
 
 
@@ -114,7 +109,7 @@ public class CadastroProdutosActivity extends AppCompatActivity {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String date = dayOfMonth+"/"+monthOfYear+"/"+year;
+                String date = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
                 valiProd.setText(date);
             }
         };
@@ -130,20 +125,6 @@ public class CadastroProdutosActivity extends AppCompatActivity {
         }
     };
 
-    private File createImageFile() throws IOException{
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = timeStamp + "_";
-
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File folder = new File(storageDir.getAbsolutePath());
-
-        if(!folder.exists()){
-            folder.mkdir();
-        }
-        cameraImageFile = File.createTempFile(imageFileName,".jpg",folder);
-
-        return cameraImageFile;
-    }
 
     private void dialogChooseFrom(){
         final CharSequence[] items ={"Galeria"};
@@ -156,55 +137,23 @@ public class CadastroProdutosActivity extends AppCompatActivity {
                     startActivityForResult(galleryIntent, 1);
 
                 }
-                /*else {
-                    try{
-
-                        File photoFile = createImageFile();
-                        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                        startActivityForResult(cameraIntent,2);
-
-                    }catch(IOException e){
-                        e.printStackTrace();
-
-                    }
-                }*/
 
             }
         });
         chooseDialog.show();
     }
-    private byte[] readInFile(String path) throws  IOException{
-        File image = new File(path);
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(), bmOptions);
 
-
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,75,stream);
-        byte[] byteArray = stream.toByteArray();
-
-        return byteArray;
-
-    }
 
     public void cadastrarProduto(View view){
         nomeProduto = (EditText) findViewById(R.id.nomeProduto);
         quantProd = (EditText) findViewById(R.id.quantidadeProduto);
         valiProd = (EditText) findViewById(R.id.validProd);
-        registro = (Button) findViewById(R.id.register);
-        /*byte[] image = null;
-        try{
-            image = readInFile(mCurrentPhotoPath);
-        }catch(Exception e){
-            e.printStackTrace();
-        }*/
+        registro = (Button) findViewById(R.id.button_register);
 
         Intent intentService = new Intent(this,ServiceIntent.class);
         intentService.putExtra("nomeProd",nomeProduto.getText().toString());
         intentService.putExtra("quantProd",quantProd.getText().toString());
         intentService.putExtra("validade",valiProd.getText().toString());
-        //intentService.putExtra("imagem",image);
         intentService.putExtra("uri",selectedImage);
         intentService.putExtra("path",mCurrentPhotoPath);
         registro.setEnabled(false);

@@ -15,6 +15,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.starter.R;
 
 import java.util.ArrayList;
@@ -80,6 +81,10 @@ public class ListaProdutosActivity extends AppCompatActivity {
     public void abrirListaForaDeValidade(View view){
         startActivity(new Intent(ListaProdutosActivity.this,RepeatingActivity.class));
     }
+    public void deslogar(View view){
+        ParseUser.logOut();
+        startActivity(new Intent(ListaProdutosActivity.this, LoginActivity.class));
+    }
 
     public class CarregaLista extends AsyncTask<Integer, String, String>{
         @Override
@@ -87,9 +92,8 @@ public class ListaProdutosActivity extends AppCompatActivity {
 
             int progress = 0;
             int total = integers[0];
-
-
             query = ParseQuery.getQuery("Produto");
+            query.whereEqualTo("username",ParseUser.getCurrentUser().getUsername().toString());
             query.addAscendingOrder("validade");
             query.findInBackground(new FindCallback<ParseObject>() {
                 @Override

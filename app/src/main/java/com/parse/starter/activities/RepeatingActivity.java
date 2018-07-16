@@ -14,22 +14,23 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.starter.R;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by artju on 09/07/2018.
- */
 
-public class RepeatingActivity extends AppCompatActivity{
+public class RepeatingActivity extends AppCompatActivity {
+
     final ArrayList<String> listaNome = new ArrayList<String>();
     final ArrayList<ParseObject> items = new ArrayList<>();
     ListView lista;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repeating);
         lista = (ListView) findViewById(R.id.listValidade);
@@ -40,9 +41,9 @@ public class RepeatingActivity extends AppCompatActivity{
 
                 ParseObject parseObject = items.get(i);
 
-                intent.putExtra("nomeProd",parseObject.get("produto").toString());
-                intent.putExtra("quantProd",parseObject.get("quantidade").toString());
-                intent.putExtra("validade",parseObject.get("validade").toString());
+                intent.putExtra("nomeProd", parseObject.get("produto").toString());
+                intent.putExtra("quantProd", parseObject.get("quantidade").toString());
+                intent.putExtra("validade", parseObject.get("validade").toString());
                 intent.putExtra("imagem", parseObject.getParseFile("foto").getUrl());
 
                 startActivity(intent);
@@ -50,15 +51,15 @@ public class RepeatingActivity extends AppCompatActivity{
             }
         });
 
-
         ParseQuery<ParseObject> filtro = ParseQuery.getQuery("Produto");
         Date date = new Date();
-        filtro.whereLessThan("validade",date);
+        filtro.whereEqualTo("username", ParseUser.getCurrentUser().getUsername().toString());
+        filtro.whereLessThan("validade", date);
         filtro.addAscendingOrder("validade");
         filtro.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-                for (ParseObject parseObject : objects){
+                for (ParseObject parseObject : objects) {
                     listaNome.add(parseObject.get("produto").toString());
                     items.add(parseObject);
 
@@ -72,5 +73,8 @@ public class RepeatingActivity extends AppCompatActivity{
 
 
         });
+
+
     }
+
 }

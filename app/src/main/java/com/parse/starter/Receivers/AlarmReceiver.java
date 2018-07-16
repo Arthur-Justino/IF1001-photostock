@@ -11,15 +11,13 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.starter.activities.RepeatingActivity;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by artju on 09/07/2018.
- */
+
 
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
@@ -30,7 +28,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         filtro.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-                if (!objects.isEmpty()){
+                if (!objects.isEmpty() && ParseUser.getCurrentUser()!=null){
                     NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
                     Intent repeating_intent = new Intent(context, RepeatingActivity.class);
@@ -42,7 +40,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                             .setContentIntent(pendingIntent)
                             .setSmallIcon(android.R.drawable.arrow_up_float)
                             .setContentTitle("Notificação de validade")
-                            .setContentText("Validade de produto próxima")
+                            .setContentText("Produtos fora da validade")
                             .setAutoCancel(true);
                     notificationManager.notify(100,builder.build());
 
